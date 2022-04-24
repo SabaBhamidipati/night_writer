@@ -10,5 +10,9 @@ RSpec.describe EnglishReader do
 
   it 'exists' do
     expect(@english_reader).to be_a(EnglishReader)
-  end #not printing file name in message for braille 
+  end #not printing file name in message for braille
+
+  it 'counts characters in input text file' do
+    expect(@english_reader.count_characters).to eq(6)
+  end
 end
