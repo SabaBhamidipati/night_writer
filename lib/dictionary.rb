@@ -29,7 +29,8 @@ attr_reader :english_to_braille, :braille_to_english
                             "y" => ["00", ".0", "00"],
                             "z" => ["0.", ".0", "00"],
                             " " => ["..", "..", ".."]
-    }
+                      }
     @braille_to_english = @english_to_braille.invert
+    # require "pry"; binding.pry
   end
 end

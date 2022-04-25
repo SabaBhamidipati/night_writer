@@ -1,5 +1,5 @@
 require './lib/english_reader'
-# require './lib/night_writer'
+require './lib/dictionary'
 
 RSpec.describe EnglishReader do
 
@@ -8,6 +8,7 @@ RSpec.describe EnglishReader do
     @braille_file_path = './spec/testing_txt_files/braille_chars.txt'
     @english_reader = EnglishReader.new(@english_file_path, @braille_file_path)
     @dictionary = Dictionary.new
+    # require "pry"; binding.pry
   end
 
   it 'exists' do
@@ -15,31 +16,31 @@ RSpec.describe EnglishReader do
   end
 
   it 'counts characters in input text file' do
-    expect(@english_reader.count_characters).to eq(6)
+    expect(@english_reader.count_characters).to eq(8)
   end
 
   it 'prints welcome message' do
-    expected = "Created './spec/testing_txt_files/braille_chars.txt' containing 6 characters"
+    expected = "Created './spec/testing_txt_files/braille_chars.txt' containing 8 characters"
     expect(@english_reader.welcome_message).to eq(expected) #keeps printing additional rows
   end
 
   it 'can separate text into elements of an array' do
     # require "pry"; binding.pry
-    expect(@english_reader.input_to_array).to eq(['d', 'd', 'd', 'd', 'd', 'd'])
+    expect(@english_reader.input_to_array).to eq(['d', 'd', 'd', ' ', ' ', 'a', 'b', 'd'])
   end
 
   it 'can convert a text string to braille' do
-    expected = ["00", ".0", ".."],["00", ".0", ".."],["00", ".0", ".."],["00", ".0", ".."], ["00", ".0", ".."], ["00", ".0", ".."]
+    expected = ["00", ".0", ".."],["00", ".0", ".."],["00", ".0", ".."],["..", "..", ".."], ["..", "..", ".."], ["0.", "..", ".."], ["0.", "0.", ".."], ["00", ".0", ".."]
     expect(@english_reader.convert_english).to eq(expected)
   end
 
   it 'aligns rows to write to the braille file' do
-    expected = [["00", "00", "00", "00", "00", "00"], [".0", ".0", ".0", ".0", ".0", ".0"], ["..", "..", "..", "..", "..", ".."]]
+    expected = [["00", "00", "00", "..", "..", "0.", "0.", "00"], [".0", ".0", ".0", "..", "..", "..", "0.", ".0"], ["..", "..", "..", "..", "..", "..", "..", ".."]]
     expect(@english_reader.align_rows).to eq(expected)
   end
 
   it 'joins rows to print braille characters in succession' do
-    expected = ["000000000000\n", ".0.0.0.0.0.0\n", "............\n"]
+    expected = "000000....0.0.00\n.0.0.0......0..0\n................"
     expect(@english_reader.join_rows).to eq(expected)
   end
 end

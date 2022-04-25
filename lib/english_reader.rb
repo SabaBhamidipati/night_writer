@@ -1,21 +1,21 @@
-require './lib/dictionary'
+require_relative 'dictionary'
 
 class EnglishReader
   attr_reader :lines, :file, :braille_file_path, :dictionary
 
   def initialize(english_file_path, braille_file_path)
     @lines = File.readlines(english_file_path, chomp: true)
-    @file = braille_file_path
-    @braille_file_path = write_file(braille_file_path)
     @dictionary = Dictionary.new
+    @file = braille_file_path
     @arr  = []
+    @braille_file_path = write_file(braille_file_path)
+    # require "pry"; binding.pry
     welcome_message
-  end
+  end #do I need to check braille v english? CLI should tell the code that
 
   def count_characters
     count = 0
     @lines.each do |line|
-    # require "pry"; binding.pry
       count += line.length
     end
     count
@@ -27,29 +27,36 @@ class EnglishReader
 
   def write_file(braille_file_path)
     writer = File.open(braille_file_path, "w")
-    writer.write(@arr) #convert_english should go here but doesn't work
-    writer.close
+    writer.write("#{join_rows}")
+    writer.close #not tested yet!!
   end
 
   def input_to_array
-    # require "pry"; binding.pry
     @lines.map { |line| line.chars}.flatten
   end
 
   def convert_english
-    # arr = []
-    input_to_array.find_all do |letter|
-        @dictionary.english_to_braille.keys.each do |key|
-          if letter == key
-          @arr << @dictionary.english_to_braille[key]
-          end
-        end
+    arr2 = []
+    input_to_array.each do |letter|
+      # require "pry"; binding.pry
+      if @dictionary.english_to_braille.keys.include?(letter)
+        arr2 << @dictionary.english_to_braille[letter]
+      else
+        arr2 << letter
+      end
     end
-    # require "pry"; binding.pry
-    @arr
+    arr2
   end
 
   def align_rows
     convert_english.transpose
   end
+
+  def join_rows
+    a = align_rows.map { |row| row.join("") }
+    a.join("\n")
+    # require "pry"; binding.pry
+  end
+
+
 end
