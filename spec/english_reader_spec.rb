@@ -27,4 +27,9 @@ RSpec.describe EnglishReader do
     # require "pry"; binding.pry
     expect(@english_reader.input_to_array).to eq(['d', 'd', 'd', 'd', 'd', 'd'])
   end
+
+  it 'can convert a text string to braille' do
+    expected = ["00", ".0", ".."],["00", ".0", ".."],["00", ".0", ".."],["00", ".0", ".."], ["00", ".0", ".."], ["00", ".0", ".."]
+    expect(@english_reader.convert_english).to eq(expected)
+  end
 end
