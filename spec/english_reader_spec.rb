@@ -20,7 +20,7 @@ RSpec.describe EnglishReader do
 
   it 'prints welcome message' do
     expected = "Created './spec/testing_txt_files/braille_chars.txt' containing 6 characters"
-    expect(@english_reader.welcome_message).to eq(expected) #keeps printing additional rows 
+    expect(@english_reader.welcome_message).to eq(expected) #keeps printing additional rows
   end
 
   it 'can separate text into elements of an array' do
@@ -36,5 +36,10 @@ RSpec.describe EnglishReader do
   it 'aligns rows to write to the braille file' do
     expected = [["00", "00", "00", "00", "00", "00"], [".0", ".0", ".0", ".0", ".0", ".0"], ["..", "..", "..", "..", "..", ".."]]
     expect(@english_reader.align_rows).to eq(expected)
+  end
+
+  it 'joins rows to print braille characters in succession' do
+    expected = ["000000000000\n", ".0.0.0.0.0.0\n", "............\n"]
+    expect(@english_reader.join_rows).to eq(expected)
   end
 end
