@@ -33,9 +33,9 @@ class EnglishReader
     @lines.map { |line| line.chars }.flatten
   end
 
-  def convert_braille
+  def convert_english
+    arr2 = []
     input_to_array.each do |letter|
-      require "pry"; binding.pry
         if @dictionary.english_to_braille.keys.include?(letter)
           arr2 << @dictionary.english_to_braille[letter]
         end

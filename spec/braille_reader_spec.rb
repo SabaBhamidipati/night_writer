@@ -31,37 +31,7 @@ RSpec.describe BrailleReader do
   end
 
   it 'can convert braille characters to english' do
-    expected = []
+    expected = ["f", "j", "l"]
     expect(@braille_reader.convert_braille).to eq(expected)
   end
-
-  xit 'aligns rows to write to the braille file' do
-    english_file_path = './spec/testing_txt_files/convert_english.txt'
-    braille_file_path = './spec/testing_txt_files/write_braille.txt'
-    english_reader = EnglishReader.new(english_file_path, braille_file_path)
-    dictionary = Dictionary.new
-
-    expected = [["0.", "..", "0.", "00"], ["..", "..", "0.", ".."], ["..", "..", "..", ".."]]
-    expect(english_reader.align_rows).to eq(expected)
-  end
-
-  xit 'joins rows to print braille characters in succession' do #update this test
-    english_file_path = './spec/testing_txt_files/convert_english.txt'
-    braille_file_path = './spec/testing_txt_files/write_braille.txt'
-    english_reader = EnglishReader.new(english_file_path, braille_file_path)
-    dictionary = Dictionary.new
-
-    expected = "000000....0.0.00.0.0.0......0..0................"
-    expect(english_reader.join_rows).to eq(expected)
-  end
-
-  xit 'can wrap braille lines at 80 characters' do #update this test
-    expected = ["f", "j", "l", "k", "f", "j", "l", "k", "f", "j", "l", "k", "f",
-      "j", "l", "w", "e", "k", "f", "j", "w", "l", "f", "j", "k", "f", "f", "f",
-      "f", "f", " ", " ", " ", " ", "c", "c", "c", "v", "v", "v", "v", "v"]
-    expect(@english_reader.wrap_lines).to eq(expected)
-  end
-
 end
-# last cpl of testing_tests
-# no test for write method
