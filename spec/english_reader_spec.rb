@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require './lib/english_reader'
 require './lib/dictionary'
 
