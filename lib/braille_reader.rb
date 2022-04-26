@@ -25,33 +25,19 @@ class BrailleReader
 
   def write_file(english_file_path)
     writer = File.open(english_file_path, "w")
-    writer.write join_rows
-    writer.close #not tested yet!!
+    writer.write convert_braille
+    writer.close
   end
 
   def input_to_array
-    @lines.map { |line| line.chars }.flatten
+    @lines.map { |line| line.scan(/.{1,2}/) }.transpose
   end
 
   def convert_braille
     arr2 = []
-    input_to_array.each do |row| #change to wrap_lines if needed
-      row.each do |letter| #this will be issue
-        if @dictionary.braille_to_english.keys.include?(letter) #change based on row 39
-          arr2 << @dictionary.braille_to_braille[letter] #change based on row 39
-        else
-          arr2 << letter #change
-        end
-      end
+    input_to_array.each do |sub|
+      arr2 << @dictionary.braille_to_english[sub]
     end
     arr2
-  end
-
-  def align_rows
-    convert_braille.transpose
-  end
-
-  def join_rows
-    align_rows.map { |row| row.join("") }
   end
 end

@@ -26,7 +26,7 @@ class EnglishReader
   def write_file(braille_file_path)
     writer = File.open(braille_file_path, "w")
     writer.write join_rows
-    writer.close 
+    writer.close #not tested yet!!
   end
 
   def input_to_array
