@@ -26,31 +26,19 @@ class EnglishReader
   def write_file(braille_file_path)
     writer = File.open(braille_file_path, "w")
     writer.write join_rows
-    writer.close #not tested yet!!
+    writer.close 
   end
 
   def input_to_array
     @lines.map { |line| line.chars }.flatten
   end
 
-  # def wrap_lines
-  #   wrapped_lines = []
-  #   input_to_array.each_slice(40) do |row|
-  #     wrapped_lines << row
-  #   end
-  #   wrapped_lines
-  # end
-
   def convert_english
     arr2 = []
-    input_to_array.each do |row| #change to wrap_lines if needed
-      row.each do |letter|
+    input_to_array.each do |letter|
         if @dictionary.english_to_braille.keys.include?(letter)
           arr2 << @dictionary.english_to_braille[letter]
-        else
-          arr2 << letter
         end
-      end
     end
     arr2
   end
@@ -60,14 +48,8 @@ class EnglishReader
   end
 
   def join_rows
-    align_rows.map { |row| row.join("") }
+    a = align_rows.map { |row| row.join("") }
+    b = a.map { |line| line.scan(/.{1,80}/) }
+    b.transpose.flatten.join("\n")
   end
-
-  # def wrap_lines
-  #   new_rows = []
-  #       join_rows.each_slice(80) do |row|
-  #         # rows << row
-  #         # a.join("\n")
-  #       end
-  # end
 end
