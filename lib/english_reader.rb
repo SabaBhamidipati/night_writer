@@ -26,7 +26,7 @@ class EnglishReader
   def write_file(braille_file_path)
     writer = File.open(braille_file_path, "w")
     writer.write join_rows
-    writer.close 
+    writer.close
   end
 
   def input_to_array
@@ -50,6 +50,7 @@ class EnglishReader
   def join_rows
     a = align_rows.map { |row| row.join("") }
     b = a.map { |line| line.scan(/.{1,80}/) }
+    # require "pry"; binding.pry
     b.transpose.flatten.join("\n")
   end
 end
