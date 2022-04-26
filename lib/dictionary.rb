@@ -31,6 +31,5 @@ attr_reader :english_to_braille, :braille_to_english
                             " " => ["..", "..", ".."]
                       }
     @braille_to_english = @english_to_braille.invert
-    # require "pry"; binding.pry
   end
 end

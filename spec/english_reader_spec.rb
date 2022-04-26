@@ -51,18 +51,17 @@ RSpec.describe EnglishReader do
     expect(english_reader.align_rows).to eq(expected)
   end
 
-  it 'joins rows to print braille characters in succession' do
+  it 'joins rows to print braille characters in succession' do #update this test
     english_file_path = './spec/testing_txt_files/convert_english.txt'
     braille_file_path = './spec/testing_txt_files/write_braille.txt'
     english_reader = EnglishReader.new(english_file_path, braille_file_path)
     dictionary = Dictionary.new
 
     expected = "000000....0.0.00.0.0.0......0..0................"
-require "pry"; binding.pry
     expect(english_reader.join_rows).to eq(expected)
   end
 
-  xit 'can wrap braille lines at 80 characters' do
+  xit 'can wrap braille lines at 80 characters' do #update this test
     expected = ["f", "j", "l", "k", "f", "j", "l", "k", "f", "j", "l", "k", "f",
       "j", "l", "w", "e", "k", "f", "j", "w", "l", "f", "j", "k", "f", "f", "f",
       "f", "f", " ", " ", " ", " ", "c", "c", "c", "v", "v", "v", "v", "v"]
@@ -70,6 +69,5 @@ require "pry"; binding.pry
   end
 
 end
-#not printing after wrap wrap_lines
 # last cpl of testing_tests
 # no test for write method
